@@ -5,11 +5,16 @@ import { sendLog } from '../util/log';
 /**
 * @desc Initializes the Google Publisher tag scripts.
 **/
-export function initializeGPT() {
+export function initializeGPT(useLimitedAds) {
   window.googletag = window.googletag || {};
   window.googletag.cmd = window.googletag.cmd || [];
 
-  appendResource('script', '//pagead2.googlesyndication.com/tag/js/gpt.js', true, true);
+  if (useLimitedAds) {
+    appendResource('script', '//pagead2.googlesyndication.com/tag/js/gpt.js', true, true);
+  } else {
+    appendResource('script', '//securepubads.g.doubleclick.net/tag/js/gpt.js', true, true);
+  }
+
   sendLog('initializeGPT()', 'Appended googletag script to the head tag of the page.', null);
 }
 
@@ -84,13 +89,13 @@ export function setTargeting(ad, options) {
 * @desc Configures the GPT configuration options.
 * @param {function} handleSlotRenderEnded - Callback function that gets fired whenever a GPT ad slot has finished rendering.
 **/
-export function dfpSettings(handleSlotRenderEnded) {
+export function dfpSettings(useLimitedAds, handleSlotRenderEnded) {
   window.googletag.pubads().disableInitialLoad();
   window.googletag.pubads().enableSingleRequest();
   window.googletag.pubads().enableAsyncRendering();
 
   window.googletag.pubads().setPrivacySettings({
-    limitedAds: true,
+    limitedAds: useLimitedAds,
   });
 
   if (this.collapseEmptyDivs) {

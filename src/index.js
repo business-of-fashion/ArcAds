@@ -29,8 +29,8 @@ export class ArcAds {
       );
       sendLog('constructor()', 'The DFP id missing from the arcads initialization script. ArcAds cannot proceed.', null);
     } else {
-      initializeGPT();
-      queueGoogletagCommand(dfpSettings.bind(this, handleSlotRendered));
+      initializeGPT(options.useLimitedAds);
+      queueGoogletagCommand(dfpSettings.bind(this, options.useLimitedAds, handleSlotRendered));
       initializeBiddingServices(this.wrapper);
     }
   }
