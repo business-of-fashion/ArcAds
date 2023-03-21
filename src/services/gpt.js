@@ -9,7 +9,7 @@ export function initializeGPT() {
   window.googletag = window.googletag || {};
   window.googletag.cmd = window.googletag.cmd || [];
 
-  appendResource('script', '//securepubads.g.doubleclick.net/tag/js/gpt.js', true, true);
+  appendResource('script', '//pagead2.googlesyndication.com/tag/js/gpt.js', true, true);
   sendLog('initializeGPT()', 'Appended googletag script to the head tag of the page.', null);
 }
 
@@ -88,6 +88,10 @@ export function dfpSettings(handleSlotRenderEnded) {
   window.googletag.pubads().disableInitialLoad();
   window.googletag.pubads().enableSingleRequest();
   window.googletag.pubads().enableAsyncRendering();
+
+  window.googletag.pubads().setPrivacySettings({
+    limitedAds: true,
+  });
 
   if (this.collapseEmptyDivs) {
     sendLog('dfpSettings()', 'This wrapper is set to collapse any empty divs.', null);
