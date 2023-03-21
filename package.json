@@ -57,5 +57,9 @@
     "anylogger-console": "^1.0.0",
     "promise-polyfill": "^8.2.0"
   },
-  "homepage": "https://github.com/washingtonpost/arcads#readme"
+  "homepage": "https://github.com/washingtonpost/arcads#readme",
+  "volta": {
+    "node": "16.19.1",
+    "npm": "8.19.4"
+  }
 }
